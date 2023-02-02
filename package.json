@@ -8,8 +8,8 @@
   "license": "MIT",
   "scripts": {
     "build": "node esbuild.mjs",
-    "prepack": "pnpm with-env pnpm build && cp package.json ./dist/package.json",
-    "start": "pnpm prepack && pnpm with-env functions-framework ./dist/index.js --target=$(grep CLOUD_FUNCTION_NAME .env | cut -d '=' -f2)",
+    "prepack": "npm with-env npm build && cp package.json ./dist/package.json",
+    "start": "npm prepack && npm with-env functions-framework ./dist/index.js --target=$(grep CLOUD_FUNCTION_NAME .env | cut -d '=' -f2)",
     "deploy-gcp": "gcloud functions deploy $(grep CLOUD_FUNCTION_NAME .env | cut -d '=' -f2) --gen2 --runtime nodejs16 --trigger-http --allow-unauthenticated --entry-point=$(grep CLOUD_FUNCTION_NAME .env | cut -d '=' -f2) --source=./dist --region=us-central1",
     "clean": "rimraf dist",
     "with-env": "dotenv -e .env --"
